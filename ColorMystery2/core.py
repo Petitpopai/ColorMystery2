@@ -28,8 +28,6 @@ def process_image(image_path: str, mode: str, difficulty: str, detail: str,
     Returns:
         output_path: The file path of the processed image.
     """
-    # This is a stub for actual image processing.
-    # For demonstration, we open the image, add an overlay, and save the processed image.
     try:
         image = Image.open(image_path)
     except Exception as e:
@@ -39,9 +37,15 @@ def process_image(image_path: str, mode: str, difficulty: str, detail: str,
     # Simulate processing by adding a text overlay indicating that the image was processed.
     draw = ImageDraw.Draw(image)
     text = "Processed"
-    # You can choose a font if available; using default font here.
+    
+    # Using default font here.
     font = ImageFont.load_default()
-    text_width, text_height = draw.textsize(text, font=font)
+    
+    # Compute text bounding box using textbbox.
+    bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
+    
     # Position text at bottom-right corner
     position = (image.width - text_width - 10, image.height - text_height - 10)
     draw.text(position, text, fill=(255, 0, 0), font=font)
