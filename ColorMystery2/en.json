@@ -1,0 +1,6 @@
+{
+  "title": "ColorMystery",
+  "upload": "Upload an image (max 50MB)",
+  "process": "Process",
+  "success": "Image processed successfully!"
+}
